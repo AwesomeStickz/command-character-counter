@@ -3,7 +3,7 @@ export function processCommandCalculations(commands: Command[]) {
 
   for (const command of commands) {
     const characters = calculateCharacters(command);
-    if (characters > 4000) console.warn(`Command ${command.name} is ${characters} characters long. Max is 4000.`);
+    if (characters > 8000) console.warn(`Command ${command.name} is ${characters} characters long. Max is 8000.`);
 
     amounts.push({ name: command.name, characters });
   }
@@ -80,6 +80,9 @@ interface Command {
   name: string;
   description: string;
   options?: Option[];
+  default_member_permissions?: string | null;
+  nsfw?: boolean;
+  version?: string;
 }
 
 interface Choice {
@@ -98,4 +101,9 @@ interface Option {
   description_localizations?: Record<string, string>;
   required?: boolean;
   channel_types?: number[];
+  autocomplete?: boolean;
+  min_value?: number;
+  max_value?: number;
+  min_length?: number;
+  max_length?: number;
 }
